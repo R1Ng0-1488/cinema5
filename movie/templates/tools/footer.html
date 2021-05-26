@@ -1,0 +1,39 @@
+{% load static %}
+<div class="container-my foot">
+    <hr>
+    <div class="row">
+        <div class="col-sm-12 col-lg-2">
+            <h3>Кинотеатр</h3>
+             <div class="my-4">
+                <p><a href="{% url 'soon' city_slug %}">Скоро в кино</a></p>
+                <p><a href="{% url 'today' city_slug %}">Расписание</a></p>
+                <p><a href="{% url 'share_list' city_slug %}">Акции и новости</a></p>
+                <p><a href="{% url 'about' city_slug cinema_pk %}">О кинотеатре</a></p>
+                <p><a href="{% url 'support' city_slug %}">Служба поддержки</a></p>
+                <p><a href="{% url 'questions' city_slug %}">Вопрос-ответ</a></p>
+             </div>
+        </div>
+        <div class="col-sm-12 col-lg-3">
+            <h3>Дополнительная информация</h3>
+            <div class="my-4">
+                {% for pdf in pdf_files %}
+                <p><a href="{% url 'pdf_file' city_slug=city_slug slug=pdf.slug %}">{{ pdf.title }}</a></p>
+                {% endfor %}
+             </div>
+        </div>
+        <div class="col-sm-12 col-lg-4">
+            <h3>Социальные сети</h3>
+            <a href="vk.com"><img width="50"  src="{% static 'images/facebook.jpg' %}"></a>
+            <a href="vk.com"><img width="38"  src="{% static 'images/vk.png' %}"></a>
+            <a href="vk.com"><img width="50"  src="{% static 'images/inst.png' %}"></a>
+            <a href="vk.com"><img width="55"  src="{% static 'images/youtube.png' %}"></a>
+            <a href="vk.com"><img width="38"  src="{% static 'images/ok.png' %}"></a>
+            <a href="vk.com"><img width="38"  src="{% static 'images/viber.png' %}"></a>
+        </div>
+        <div class="col-sm-12 col-lg-3">
+            <h3>Мобильное приложение в
+App Store и Google Play</h3>
+        </div>
+    </div>
+    <p>Разработано и поддерживается <a href="">Cinemabox</a></p>
+</div>

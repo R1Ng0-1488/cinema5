@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Ваши билеты{% endblock %}
+
+{% block content %}
+<div class="container-my">
+<div class="row">
+    <div class="col">
+        <h2>Вот ваши билеты</h2>
+        <div class="order text-white">
+            <p>{{ tickets.first.session.movie.age_limit }}</p>
+            <p><strong>{{ tickets.first.session.movie }}</strong></p>
+            <p>{{ tickets.first.session.format }}, {{ tickets.first.place.row.hall.name }}</p>
+            <p>{{ tickets.first.session.cinema }}</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Дата/Время</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>
+                            {{ tickets.first.session.date }}
+                            {{ tickets.first.session.time }}
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="2">Ряд</th>
+                        <th></th>
+                        <th></th>
+                        <th>Место</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in row_set %}
+                   <tr>
+                       <th colspan="2">
+                           {{ row }}
+                       </th>
+                       <th></th>
+                       <th></th>
+                       <th>
+                       {% for ticket in tickets %}
+                           {% if ticket.place.row.row == row %}
+                              {{ ticket.place.place }},
+                           {% endif %}
+                       {% endfor %}
+                       </th>
+                   </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+            <p>№{{ order.id }}</p>
+            <p>Общая стоимость {{ order.price }}</p>
+            <img width="280" src="{{ order.qr_code.url }}">
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

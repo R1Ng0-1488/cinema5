@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-my">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-3">        
+            <div class="image-detail">
+                <img   src="{{ movie.poster.url }}">
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-9">
+            <h5 class="md-color">{{ movie.age_limit }}</h5>
+            <h3><strong>{{ movie.title }}</strong></h3>
+            <table class="mb-2">
+                <tr {% if movie.country %}>
+                    <td class="md-color">Производство</td>
+                    <td class="pl-4">{{ movie.country }}</td>
+                </tr {% endif %}>
+                <tr {% if movie.genres %}>
+                    <td class="md-color">Жанры</td>
+                    <td class="pl-4">{{ movie.genres }}</td>
+                </tr {% endif %}>
+                <tr {% if movie.director %}>
+                    <td class="md-color">Режиссёр</td>
+                    <td class="pl-4">{{ movie.director }}</td>
+                </tr {% endif %}>        
+                <tr {% if movie.actors %}>
+                    <td class="md-color">В главных ролях</td>
+                    <td class="pl-4">{{ movie.actors }}</td>
+                </tr {% endif %}>
+                <tr {% if movie.duration %}>
+                    <td class="md-color">Длительность</td>
+                    <td class="pl-4">{{ movie.duration }}</td>
+                </tr {% endif %}>
+                <tr {% if movie.memorandum %}>
+                    <td class="md-color">Меморандум</td>
+                    <td class="pl-4">{{ movie.memorandum }}</td>
+                </tr {% endif %}>
+            </table>
+            <p>{{ movie.description }}</p>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col">
+            {% if soon %}
+            {% else %}
+            <form method="get">
+                <input type="date" name="date">
+                <input type="submit">
+            </form>
+            {% endif %}
+            {% if sessions2 %}
+            {% for cinema in sessions2 %}
+                <div class="col-12">
+                    <div {% if cinema.first %} class="session-detail-back">
+                        <div class="row">
+                            <div class="col-2">
+                                <strong>{{ cinema.first.cinema.name }}</strong>
+                                <p>{{ cinema.first.cinema.information }}</p>
+                            </div>
+                            <div class="col-10">
+                                {% for session in cinema  %}
+                                <a href="{% url 'session_detail' city_slug session.id %}">
+                                    <div class="session">
+                                        <h4>{{ session.time|time:'H:i' }}</h4>
+                                        <p>от {{ session.price }} Р</p>
+                                        <p>{{ session.hall }}</p>
+                                    </div>
+                                </a>
+                                {% endfor %}
+                            </div>
+                        </div>    
+                    </div {% endif %}>
+
+                </div>
+            {% endfor %} 
+            {% else %}
+            <div class="row">
+            {% for cinema in sessions %}
+                <div class="col-12">
+                    <div {% if cinema.first %} class="session-detail-back">
+                        <div class="row">
+                            <div class="col-2">
+                                <strong>{{ cinema.first.cinema.name }}</strong>
+                                <p>{{ cinema.first.cinema.information }}</p>
+                            </div>
+                            <div class="col-10">
+                                {% for session in cinema  %}
+                                <a href="{% url 'session_detail' city_slug session.id %}">
+                                    <div class="session">
+                                        <h4>{{ session.time|time:'H:i' }}</h4>
+                                        <p>от {{ session.price }} Р</p>
+                                        <p>{{ session.hall }}</p>
+                                    </div>
+                                </a>
+                                {% endfor %}
+                            </div>
+                        </div>    
+                    </div {% endif %}>
+
+                </div>
+            {% endfor %}    
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

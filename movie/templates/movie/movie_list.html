@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% load movie_extras %}
+{% block title %}Movies{% endblock %}
+
+{% block content %}
+{% include 'tools/carousel.html' %}
+<div class="container-my">
+<div class="row">
+    {% for movie in object_list %}
+    <div class="col-sm-12 col-md-12 col-lg-6">
+      <div class="movie">
+        <div class="row">
+            <div class="col-4">
+                <div class="image" style="background: url({{ movie.poster.url }});
+                                          background-size: auto 100%;">
+                    <div class="age-limit" 
+                        {% if movie.age_limit.for_adults %}
+                        style="background: #fc3d3d"
+                        {% endif %}><p>{{ movie.age_limit }}</p></div>
+                    <a data-toggle="modal" data-target="#staticBackdrop-{{ movie.id }}">
+                        <div class="trailer">
+                            <div class="triangle"></div>
+                        </div>
+                    </a>
+                <div class="modal fade" id="staticBackdrop-{{ movie.id }}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">{{ movie.title }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <iframe width="100%" height="300" src="{{ movie.trailer }}" frameborder="0" allowfullscreen></iframe>
+                         
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                        <button type="button" class="btn btn-primary">Понял</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                          
+                          
+                            
+                        
+                      
+                    
+                        
+
+                    {% if movie.premier %}
+                        <div class="premier"><p>Премьера</p></div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="row">
+                <div class="title col-12 mx-sm-0 my-5 mx-lg-3">
+                    <h4><strong>{{ movie.title }}</strong></h4>
+                    <p>{{ movie.genres }}</p>
+                </div>
+                <div class="col-sm-12 col-lg-12">
+                    <div class="row">
+                        
+                        <div class="col-8"></div>
+                        <div class="col-4 mt-sm-0 mt-lg-5">
+                            
+                               
+                                {% if today %}
+                                
+                                <a class="upsession" href="{% url 'movie_detail_today' city_slug movie.id  %}">
+                                    <div class="session">
+                                    <p>Все {{ movie|session_count_today:city_slug }} сеансов</p>
+                                </div>
+                                </a>
+                                {% elif children %}
+                                
+                                <a class="upsession" href="{% url 'movie_detail_today' city_slug movie.id  %}">
+                                    <div class="session">
+                                    <p>Все {{ movie|session_count_today:city_slug }} сеансов</p>
+                                </div>
+                                </a>
+                                {% elif tomorrow %}
+                            
+                                <a class="upsession" href="{% url 'movie_detail_tomorrow' city_slug movie.id %}">
+                                <div class="session">
+                                <p>Все {{ movie|session_count_tomorrow:city_slug }} сеансов</p>
+                                </div>
+                                </a>
+                                {% elif soon %}
+                                
+                                <a class="upsession" href="{% url 'movie_detail_soon' city_slug movie.id %}">
+                                <div class="session">
+                                <p>Все {{ movie|session_count_soon:city_slug }} сеансов</p>
+                                </div>
+                                </a>
+                                
+                                {% else %}
+                                
+                                <a class="upsession" href="{% url 'movie_detail_date' city_slug date0 movie.id %}">
+                                <div class="session"> 
+                                <p>Все {{ movie|session_count_date:date }} сеансов</p>
+                                </div>
+                                </a>
+                                {% endif %}
+                                
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+</div>
+</div>
+<script type="text/javascript">
+function trailer(url) {
+    let body = document.querySelector('body')
+    // console.log(body)
+    let div = document.createElement('div')
+    div.className = 'trailer-block'
+    div.innerHTML = `<div>
+    <iframe width="100%" height="100%" src="${url}" frameborder="0" allowfullscreen></iframe>
+    </div>
+    `
+    document.body.prepend(div)
+    console.log(url)
+}
+</script>
+{% include "tools/shares.html" %}
+{% endblock %}

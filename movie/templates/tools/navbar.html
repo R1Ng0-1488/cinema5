@@ -1,0 +1,60 @@
+<nav class="bg">
+    <nav class="navbar navbar-expand-lg navbar-light container-my">
+
+    <div class="nav-image">
+        <a class="navbar-brand" href="{% url 'today' city_slug %}">
+            {% include 'movie/logo.html' %}
+        </a>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключатель навигации">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item  dropdown">
+                <a class="nav-link dropdown-toggle danger" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{ city_name }}</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    {% for city in cities %}
+                    <a class="dropdown-item" href="{% url 'today' city.slug %}">{{ city.name }}</a>
+                    {% endfor %}
+                </div>
+            </li>
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'today' city_slug %}">Сегодня
+                <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link blue" href="{% url 'tomorrow' city_slug %}">Завтра<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link orange" href="{% url 'soon' city_slug %}">Скоро</a>
+            </li>
+            <li>
+                <form name="date" action="{% url 'filter' city_slug %}" method="get">
+                    <input type="date" name="date">
+                </form>
+            </li>
+            <li {% if date_now %}>
+                {{ date_now }}
+            </li {% endif %}>
+            <ul class="navbar-nav mr-auto">
+            <li class="nav-item  dropdown">
+                <a class="nav-link dropdown-toggle danger" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            </a>
+                <div class="dropdown-menu move" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'today' city_slug %}">Расписание</a>
+                    <a class="dropdown-item" href="{% url 'children' city_slug %}">Детям</a>
+                    <a class="dropdown-item" href="{% if user.is_authenticated %}{% url 'account' %}{% else %}{% url 'check_email' %}{% endif %}">Личный кабинет</a>
+                    <a class="dropdown-item" href="{% url 'share_list' city_slug %}">Акции и новости</a>
+                    <a class="dropdown-item" href="{% url 'questions' city_slug %}">Помощь</a>
+                    
+                </div>
+            </li>
+        </ul>
+        </ul>
+    </div>
+    </nav>
+</nav>

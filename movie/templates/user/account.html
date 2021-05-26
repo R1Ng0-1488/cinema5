@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-my">
+	<div class="row">
+		<div class="col-lg-3 col-sm-12">
+			<h2>Личный кабинет</h2>
+			<p>{{ user }}</p>
+			<p>{{ user.bonuses }}</p>
+			<a class="btn btn-place-usual mt-1" href="{% url 'update_user' pk=user.id %}">Edit account</a>
+			<a class="btn btn-place-danger mt-1" href="{% url 'logout' %}">Log Out</a>
+		</div>
+		<div class="col-lg-9 col-sm-12">
+			<h1>Заказы</h1>
+			<div class="row">
+			{% for order in user.order_set.all %}
+				<div class="col-lg-4 col-sm-12">
+					<div class="order text-white">
+			            <p>{{ order.ticket_set.first.session.movie.age_limit }}</p>
+			            <p><strong>{{ order.ticket_set.first.session.movie }}</strong></p>
+			            <p>{{ order.ticket_set.first.session.format }}, {{ order.ticket_set.first.place.row.hall.name }}</p>
+			            <p>{{ order.ticket_set.first.session.cinema }}</p>
+			            
+			            <table>
+			                <thead>
+			                    <tr>
+			                        <th>Дата/Время</th>
+			                    </tr>
+			                </thead>
+			                <tbody>
+			                    <tr>
+			                        <th>
+			                            {{ order.ticket_set.first.session.date }}
+			                            {{ order.ticket_set.first.session.time }}
+			                        </th>
+			                    </tr>
+			                </tbody>
+			            </table>
+			            <table>
+			                <thead>
+			                    <tr>
+			                        <th colspan="2">Ряд</th>
+			                        <th></th>
+			                        <th></th>
+			                        <th>Место</th>
+			                    </tr>
+			                </thead>
+			                <tbody>
+			                    {% for row in order.get_row_set %}
+			                   <tr>
+			                       <th colspan="2">
+			                           {{ row }}
+			                       </th>
+			                       <th></th>
+			                       <th></th>
+			                       <th>
+			                       {% for ticket in order.ticket_set.all %}
+			                           {% if ticket.place.row.row == row %}
+			                              {{ ticket.place.place }},
+			                           {% endif %}
+			                       {% endfor %}
+			                       </th>
+			                   </tr>
+			                    {% endfor %}
+			                </tbody>
+			            </table>
+			            
+			            <p>№{{ order.id }}</p>
+			            <p>Общая стоимость {{ order.price }}</p>
+			            <img width="280" src="{{ order.qr_code.url }}">
+			        </div>
+				</div>
+				
+			{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

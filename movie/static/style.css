@@ -1,0 +1,590 @@
+a:hover {
+	text-decoration: none; 
+}
+/*
+ =========================================
+session
+=========================================
+*/
+.session {
+    display: inline-block;
+	transition: .7s;
+    background: white;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    height: 80px;
+    width: 80px;
+    line-height: 0.7em;
+    box-shadow:  0px 10px 10px -10px rgba(0,0,0,0.3);
+}
+
+.session p {
+    color:  gray;
+    font-size: 12px;
+    position: relative;
+}
+.session p + p,
+.session h4 + p {
+    line-height: 0.2em;
+    bottom: 0em;
+}
+.session > p {
+    bottom: -2em;
+}
+.session:hover {
+    box-shadow:  0px 10px 20px -7px rgba(0,0,0,0.3);
+}
+/*
+ =========================================
+session-detail
+=========================================
+*/
+.session-detail-back {
+    background: #f2f2f2;
+    border-radius: 10px;
+    margin: 10px 0 10px 0;
+    padding: 30px; 
+}
+.session-detail-back a {
+    color: black;
+}
+/* 
+=========================================
+navbar 
+=========================================
+*/
+.navbar-brand {
+    padding: 14px 0 10px 0;
+}
+/* navbar */
+.nav-link{
+	font-size: 20px;
+	/*border: 1px solid red;*/
+}
+.dropdown-menu {
+	border-radius: 5px;
+	border: 0px solid red;
+	background: #57b9ff;
+}
+.move {
+    position: relative;
+    left: -150px;
+}
+.dropdown-item {
+	border-radius: 5px;
+	width: 95%;
+	margin: 5px;
+}
+.dropdown-item:hover {
+	background: #87cdff;
+	color: white;
+} 
+.nav-item .dropdown-menu a {
+	color: white !important;
+}
+.nav-item .dropdown-menu a:hover {
+	color: white !important;
+}
+.nav-item {
+	transition: .7s;
+}
+.nav-item .active {
+	color: #6fb1fc !important;
+}
+.nav-item a {
+    color: black !important;
+}
+.nav-item .orange:hover {
+	color: #ffac30 !important;
+}
+.nav-item .blue:hover {
+	color: #6fb1fc !important;
+}
+/* 
+=========================================
+movie 
+=========================================
+*/
+.movie {
+    box-sizing: padding-box;
+    /*box-sizing: border-box;*/
+    background: #f2f2f2;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    height: 95%;
+    width: 90%;
+    max-width: 1024px;
+}
+
+@media screen and (min-width:200px) and (max-width:700px) {
+    .movie .title {
+        visibility: hidden;
+    }
+}
+/*
+=========================================
+movie detail
+=========================================
+*/
+.image-detail {
+    display: block;
+}
+.image-detail > img {
+    width: 300px;
+    border-radius: 7px;
+}
+
+.md-color {
+    color: gray;
+}
+
+
+/* 
+=========================================
+image 
+=========================================
+*/
+.image {
+    position: relative;
+    right: 15px;
+    top:10px;
+    width: 200px;
+    height: 300px;
+    border-radius: 12px;
+}
+.image > .age-limit {
+    background: rgba(242, 242, 242, 0.3); 
+    border-radius: 4px;
+    position: relative;
+    left: 10px;
+    top: 10px;
+    width: 25px;
+    height: 25px;
+    color: white;
+    text-align: center;
+}
+.age-limit p {
+    font-size: 13px;
+    position: relative;
+    top:1px;
+}
+/*
+==============================
+trailer
+==============================
+*/
+.trailer-block {
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 2;
+    overflow: hidden;
+}
+.trailer-block div {
+    background: red;
+    position: relative;
+    top: 10%;
+    left: 10%:;
+    z-index: 1;
+}
+.trailer {
+    background: rgba(242, 242, 242, 0.3);
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    position: relative;
+    top:100px;
+    left: 80px;
+}
+.trailer > .triangle {
+    position: relative;
+    left: 13px;
+    top: 10px;
+    width: 0;
+    height: 0;
+    border: 100px solid transparent;
+    border-width: 11px 0 11px 18.5px; 
+    border-color: transparent transparent transparent white;
+}
+.trailer:hover {
+    background: rgba(242, 242, 242, 1);
+}
+.trailer:hover .triangle {
+    border-color: transparent transparent transparent black;
+}
+/*
+=======================
+premier
+=======================
+*/
+.premier {
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius:12px; 
+    background: #b02c2c;
+    height: 30px;
+    position: relative;
+    top: 205px;
+}
+.premier > p {
+    position: relative;
+    top: 2px;
+    color: white;
+    text-align: center;
+    font-size: 14px;
+}
+
+/*
+=========================================
+carousel
+=========================================
+*/
+.carousel {
+    height: 314px;
+    border-radius: 12px;
+}
+
+.btn-c {
+    position: relative;
+    top:260px;
+    left: 1120px;
+}
+
+@media screen and (min-width:200px) and (max-width:600px) {
+    .btn-c {
+        position: relative;
+        top: 260px;
+        left: 260px;
+    }
+}
+
+@media screen and (min-width:600px) and (max-width:1200px) {
+    .btn-c {
+        position: relative;
+        top: 260px;
+        left: 500px;
+    }
+}
+
+
+.carousel-control-next,
+.carousel-control-prev /*, .carousel-indicators */ {
+    filter: invert(100%);
+}
+@-moz-document url-prefix() {
+    .carousel-control-prev{
+        position: relative;
+        top: -222px;
+        left: 28px;
+        width: 100px;
+        height: 100px;
+
+    }
+    .carousel-control-next{
+        position: relative;
+        top: -322px;
+        left: 1382px;
+        width: 100px;
+        height: 100px;
+    }
+
+}
+.container-my {
+    max-width: 1270px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    padding-right: 0px;
+    padding-left: 10px;
+}
+@media screen and (min-width:200px) and (max-width:700px) {
+    .carousel-control-next,
+    .carousel-control-prev /*, .carousel-indicators */ {
+        /*visibility: hidden;*/
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 0;
+    }
+}
+/* 
+=========================================
+another carousel 
+=========================================
+*/
+.carouse-image img {
+	border-radius: 10px;
+	height: 200px;
+	object-fit:cover;
+}
+.carouse-image p {
+	color: black;
+}
+/* 
+=========================================
+footer 
+=========================================
+*/
+.foot p,
+.foot a{
+	color: gray;
+}
+.foot a:hover {
+	color: #459cff;
+}
+
+
+/* 
+=========================================
+Hall 
+=========================================
+*/
+.error {
+	background: rgba(0, 0, 0, 0.5);
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 2;
+	overflow: hidden;
+}
+.error div {
+	background: white;
+	padding: 10px;
+	border-radius: 8px;
+	width: 300px;
+	/*height: 100px;*/
+	position: relative;
+	left: 40%;
+	top: 40%;
+	z-index: 1;
+
+}
+.error div p {
+	color: grey;
+}
+.error div a {
+	cursor: pointer;
+	color: blue;
+}
+.seat {
+    display: inline-block;
+}
+.row-text {
+	position: relative;
+	top: 7px
+}
+
+.place-empty {
+    background: white;
+    padding:1px 10px;
+    margin: 10px;
+}
+
+.place-text{
+	display: inline-block;
+	position: relative;
+	bottom: 17px;
+}
+
+.btn-place {
+	background: #57b9ff;
+	color: white;
+	padding: 10px 100px 10px 100px;
+}
+.btn-place:hover {
+	color: white;
+}
+
+.btn-place-danger {
+    background: white;
+    color: red;
+    padding: 10px 100px 10px 100px;
+    border: 1px solid black;
+}
+.btn-place-danger:hover {
+    color: red;
+}
+
+.btn-place-usual {
+    background: white;
+    color: black;
+    padding: 10px 100px 10px 100px;
+    border: 1px solid black;
+}
+.btn-place-usual:hover {
+    color: black;
+}
+
+.place-2 label,
+.place-empty label,
+.place-your label,
+.place-bought label,
+.place label {
+	position: relative;
+    display: inline-block;
+    border-radius:5px;
+	margin: 5px;
+    width: 33px;
+    height: 33px;
+    text-align: center;
+}
+
+.place-your label{
+	background: #ffac30;
+	color: : #ffac30;
+}
+.place-bought label {
+    background: #c4c4c4;
+    color: #c4c4c4;
+}
+.place label {
+    background: #65acfc;
+    color: #65acfc;
+    cursor: pointer;
+}
+.place-2 label {
+    background: #65acfc;
+    color: #65acfc;
+}
+
+.place label:hover::before{
+	font-size: 14px;
+	border: 2px solid #c5d1fc;
+	position: absolute;
+	content: attr(data-title);
+	border-radius: 10px;
+	width: 100px;
+	padding: 2px;
+    background: white;
+    color: black;
+    left: -35px;
+    bottom: 40px;
+}
+
+
+.place input:hover {
+    background: red;
+}
+
+
+.place input:checked + label {
+    background: #ffac30;
+    color: white; 
+}
+
+/*
+=================================================
+create order
+=================================================
+*/
+
+.near-buttons {
+   background: #f2f2f2;
+}
+
+.one {
+    border-bottom-right-radius: 20px;
+    background: #f2f2f2;
+    color: gray;
+    cursor: pointer;
+}
+.one-active {
+    border-top-right-radius: 20px;
+    background: white;
+    cursor: pointer;
+}
+.two-active {
+    border-top-left-radius: 20px;
+    background: white;
+    cursor: pointer;
+}
+.two {
+    border-bottom-left-radius: 20px;
+    background: #f2f2f2;
+    color: gray;
+    cursor: pointer;
+}
+
+.form-element p {
+    font-size: 19px;
+    position: relative;
+    top: 7px;
+    padding: 15px;
+}
+
+.form-input {
+    padding: 10px 0px 10px 30px;
+    width: 100%;
+    color: black;
+    font-size: 18px;
+}
+
+.second p{
+    font-size: 10px;
+}
+
+#btn-right {
+    position: relative;
+    left: 500px;
+}
+
+@media screen and (min-width:200px) and (max-width:600px) {
+    #btn-right {
+        position: relative;
+        left: 50px;
+    }
+}
+/*
+==============================
+payment
+==============================
+*/
+
+#card-number, #cvv, #expiration-date {
+    border: 1px solid black;
+    height: 40px;
+    width: 300px;
+}
+
+.order {
+    background: #57b9ff;
+    border-radius: 15px;
+    width: 300px; 
+    margin: 10px;
+}
+
+.order p {
+    margin: 0;
+    padding: 10px 0px 0px 26px;
+    text-align: left;
+    line-height: 15px;
+}
+
+.order table {
+    margin-left: 26px;
+    line-height: 15px;
+    margin-bottom: 10px;
+}
+
+.order img {
+    margin: 10px;
+    border-radius: 15px;
+}
+
+
+/*
+===========================
+shares
+===========================
+*/
+
+
+.share h3 {
+    line-height: 15px;
+}
+.share img {
+    border-radius: 12px;
+}

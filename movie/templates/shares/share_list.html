@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-my">
+	<div class="row">
+		<div class="col-12">
+			<h2>Акции и новости</h2>
+		</div>
+
+		{% for share in share_list %}
+		<div class="col-sm-12 col-lg-4">
+			<div class="carouse-image">
+				<a href="{% url 'share_detail' city_slug share.slug %}">
+				<img  class="" src="{{ share.image.url }}" alt="">
+				<p>{{ share }}</p></a>
+				
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}

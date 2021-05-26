@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Use Bonuses{% endblock %}
+{% block content %}
+<div class="container-my">
+    {% if messages %}
+        {% for e in messages %}
+            {{ e }}
+        {% endfor %}
+    {% endif %}
+    <div class="row">
+        <div class="col">
+            <h1>Оплата бонусами</h1>
+            <p>Ваши бонусы спишуться 1 бонус = 1 руболь </p>
+            <form action="{% url 'create_user_order' city_slug %}" method="post">
+                <input min="0" type="number" name="bonuses">
+                {% csrf_token %}
+                <button type="submit">Pay</button>
+            </form>
+        </div>
+        <div class="col">
+            <h1>Оплата без бонусов</h1>
+            <p>Оплата без бонусов вам будет начислено 5% от стоимости билетов</p>
+            <a href="{% url 'create_user_order' city_slug %}">Pay</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

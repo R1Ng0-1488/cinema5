@@ -1,0 +1,42 @@
+<section class=" m-2" id="shares" >
+  
+<div id="carouselExampleControls" class="carousel slidec" data-ride="carousel">
+  <div class="carousel-inner container-my mt-5">
+    <h2>Акции и новости</h2>
+      <div class="carousel-item active">
+          <div class="row">
+          {% for share in first_shares %}
+          <div class="col-4 carouse-image">
+              <a href="{% url 'share_detail' city_slug=city_slug slug=share.slug %}">
+                <img class="w-100" src="{{ share.image.url }}">
+                <p>{{ share.title }}</p>
+              </a>
+          </div>
+          {% endfor %}
+          </div>
+    </div>
+    {% for shares in last_shares %}
+    <div class="carousel-item">
+        <div class="row">
+        {% for share in shares %}
+        <div class="col-4 carouse-image">
+            <a href="{% url 'share_detail' city_slug=city_slug slug=share.slug %}">
+                <img class="w-100 "  src="{{ share.image.url }}">
+                <p>{{ share.title }}</p>
+            </a>
+        </div>
+        {% endfor %}
+        </div>
+    </div>
+      {% endfor %}
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+</section>

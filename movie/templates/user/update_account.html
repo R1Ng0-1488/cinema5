@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-my">
+	<div class="row">
+		<div class="col-4"></div>
+		<div class="co-8l">
+			<h1>Личный кабинет</h1>
+			<form method="POST">
+				{% csrf_token %}
+				<p>{{ form.first_name }}</p>
+				<p>{{ form.last_name }}</p>
+				<p>{{ form.email }}</p>
+				<button class="btn btn-place-usual" type="submit">Update</button>
+			</form>
+			<a class="btn btn-place-danger mt-2" href="{% url 'account' %}">back</a>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-my">
+	<div class="row">
+		<div class="col">
+			{{ email }}
+			<form action="">
+				{% csrf_token %}
+				<!-- <input type="email" name="email" value="{{ email }}" hidden>
+				<input type="password" name="password"> -->
+				{{ form.as_p }}
+				<button class="btn btn-success" type="submit">login</button>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

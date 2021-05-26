@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+<div class="container-my">
+<div class="row form-element">
+    <div class="col-sm-12 col-lg-4 near-buttons"></div>
+    
+    	<div id="first-button" class="col-sm-12 col-lg-4 text-center {% if errors2 or errors3 %} one {% else %} one-active {% endif %}">
+        	
+        	<p >Быстрая оплата</p>
+        	
+    	</div>
+        
+    	<div id="second-button" class="col-sm-12 col-lg-4 text-center form-element {% if errors2 or errors3 %} two-active {% else %} two {% endif %}">
+    		
+        	<p >Вход или регистрация</p>    
+    		
+    	</div>
+    
+</div>
+<div class="row">
+    <div class="col-sm-12 col-lg-4 near-buttons">
+    	<div class="m-5">
+	        <h4>Ваша заказ</h4>
+	        <p>Билет {{ tickets_count }} шт. {{ total_price }} р.</p>
+	        <hr>
+        	<p>Всего: {{ total_price }} р.</p>
+    	</div>
+    </div>
+    <div class="col-sm-12 col-lg-8">
+        <div id="first" {% if errors2 or errors3 %} hidden {% endif %}>
+            <div class="row">
+                <div class="col-sm-12 col-lg-6">
+                    <h3 class="mt-5 ml-5">Введите данные</h3>
+                    <form name="first" action="" method="post" class="mx-5">
+                        {% csrf_token %}
+                        {{ form_one.as_p }}
+
+                        {% for error in errors.email %}
+                        <p class="text-danger">{{ error }}</p>
+                        {% endfor %}
+                    </form>
+                </div>
+                <div class="col-sm-12 col-lg-6">
+                    <h3 class="mt-5">Что такое быстрая оплата?</h3>
+                    <p>При быстрой покупке билетов, кинотеатр начисляет вам бонусные баллы по указанному номеру телефона.</p>
+                    <p>Чтобы воспользоваться баллами, нужно зарегистрироваться.</p>
+                </div>
+            </div>
+            
+        </div>
+        <div id="second" {% if errors2 or errors3 %}{% else %} hidden {% endif %}>
+            <div class="row">
+                <div class="col-sm-12 col-lg-6">
+                    <h3 class="ml-5 mt-5">Зачем регистрироваться?</h3>
+                    <p class="ml-5">При регистрации вы получаете доступ к нашей
+                    бонусной системе. Вы сможете копить бонусы и расплачиваться ими за билеты.</p>
+                    <p class="ml-5">Чтобы зарегистрироваться или войти в профиль введите ваш номер телефона.
+                    </p>
+                </div>
+                <div class="col-sm-12 col-lg-6">
+                    <h3 class="mt-5 mx-5">Регистрация</h3>
+                    <form name="second" action="{% url 'check_phone' %}" method="post" class="mx-5">
+                        {% csrf_token %}
+                        <p>{{ form_two.email }}</p>
+                        {% for error in errors2.email %}
+                        <p class="text-danger">{{ error }}</p>
+                        {% endfor %}
+                        <br>
+                        <p>{{ form_two.password }}</p>
+                        {% for error in errors2.password2 %}
+                        <p class="text-danger">{{ error }}</p>
+                        {% endfor %}
+                        {% for error in errors2.password %}
+                        <p class="text-danger">{{ error }}</p>
+                        {% endfor %}
+                        {% for error in errors3 %}
+                        <p class="text-danger">{{ error }}</p>
+                        {% endfor %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+	<div class="col-sm-12 col-lg-4 near-buttons"></div>
+	<div class="col-sm-12 col-lg-8">
+		<p class="ml-5 mt-5">Продолжая, я принимаю политику конфиденцальности и пользовательское соглашение.</p>
+        <div>  
+		  <a class="ml-5" href="{% url 'cancel_tickets' slug %}">Отмена</a><button id="btn-right" class="btn-place btn">Далее</button>
+        </div>
+	</div>
+</div>
+</div>
+<script type="text/javascript">
+	let btn_right = document.getElementById('btn-right') 
+    let first_button = document.getElementById('first-button')
+    let second_button = document.getElementById('second-button')
+    var first = document.getElementById('first')
+    var second = document.getElementById('second')
+    
+    var flag = false
+
+    let first_form = document.querySelector('form[name=first]')
+    let second_form = document.querySelector('form[name=second]')
+    btn_right.addEventListener('click', e => {
+    	if (flag){    		
+    		second_form.submit()
+    	} else{
+    		first_form.submit()
+    	}
+    })
+
+    first_button.addEventListener('click', e=> {
+        let classes_one = first_button.classList
+        let classes_two = second_button.classList
+        // console.log(classes)
+        classes_one.remove('one')
+        classes_one.add('one-active')
+        classes_two.remove('two-active')
+        classes_two.add('two')
+        first.hidden = false
+        second.hidden = true
+        flag = false
+    })
+
+    second_button.addEventListener('click', e=> {
+        let classes_one = first_button.classList
+        let classes_two = second_button.classList
+        // console.log(classes)
+        classes_two.remove('two')
+        classes_two.add('two-active')
+        classes_one.remove('one-active')
+        classes_one.add('one')
+        first.hidden = true
+        second.hidden = false
+        flag = true
+    })
+
+    
+</script>
+{% endblock %}

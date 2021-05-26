@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title%}Вопросы{% endblock %}
+
+<style>
+    a{
+        cursor: pointer;
+    }
+</style>
+{% block content %}
+<div class="container-my">
+    <div class="row">
+        <div class="col point">
+            {% for title_questions in object_list %}
+            <p class="point" style="cursor:pointer" onclick="lol({{ title_questions.id }})">{{ title_questions }}</p>
+            <ul class="questions-{{title_questions.id}}" hidden>
+                {% for question in  title_questions.answer_set.all %}
+                <li><a style="cursor: pointer;" onclick="detail('{% url 'answer' city_slug question.id %}')">{{ question.question }}</a></li>
+                {% endfor %}
+            </ul>
+            {% endfor %}
+        </div>
+        <div id="div" class="col">
+            {% block pre-content %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+<script>
+function lol (id) {
+    document.querySelectorAll(`ul.questions-${id}`).forEach(q => q.hidden = !q.hidden )
+}
+let div = document.getElementById('div')
+function detail(url) {
+    fetch(`http://127.0.0.1:8000${url}`, {
+        method: 'GET'}).then(response => response.json())
+        .then(json => render(json))
+        .catch(error => console.error(error))
+}
+
+function render(data) {
+    div.innerHTML = data.answer
+}
+
+</script>
+{% endblock %}

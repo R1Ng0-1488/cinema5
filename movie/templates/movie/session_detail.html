@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load movie_extras %}
+
+{% block content %}
+
+
+<div class="container-my">
+
+<form name="ticket" action="{% url 'create_ticket' city_slug session.id  %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="session" value="{{ session.id }}">
+<div class="row m-5">
+    <div class="col-9">
+        <div class="row mr-5">
+        {% for row in session.hall.row_set.all %}
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-1">
+                        <div class="row-text">{{ row.row }}</div>
+                    </div>
+                    <div class="col-10 text-center">
+                        {% for place in row.place_set.all %}
+                        <div class="seat">
+                        {% if place.place %}
+                        <div class="{% if place.id|is_ticket:session.id %}place-bought{% else %}place{% endif %}" onclick="create_ticket({{ place.id }})">
+                        <span id="{{ place.id }}">
+                            <input type="checkbox" name="place" value="{{ place.id }}" hidden>
+                            <label data-title="{{place.row.row}} ряд, {{ place.place }} место {{ session.price }} р.">{{ place.place }}</label>
+                        </span>
+                        </div>
+                        {% else %}
+                        <div class="place-empty">
+                        
+                        </div>
+                        {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="col-1">
+                        <div class="row-text">{{ row.row }}</div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="col-12 text-center">
+            <div class="seat">
+            <div class="place-bought">
+                <label></label>
+            </div> 
+            </div><div class="place-text"> - занято</div>
+            <div class="seat">
+            <div class="place-2">
+                <label></label>
+            </div> 
+            </div><div class="place-text"> - свободно</div>
+            <div class="seat">
+            <div class="place-your">
+                <label></label>
+            </div> 
+            </div><div class="place-text">- ваше место</div>
+        </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <h5><strong>{{ session.movie }} {{ session.movie.age_limit }}</strong></h5>
+        <p>{{ session.date }} {{ session.time }}</p>
+        <p>{{ session.format }} {{ session.hall }}</p>
+        <p><nobr id=price>0</nobr> рублей</p>
+        <button class="btn btn-place" type="submit">Далее</button>
+    </div>
+</div>
+</form>
+</div>
+<script>
+function create_ticket(id) {
+	let span = document.getElementById(`${id}`)
+	let input = span.firstElementChild
+	let label = span.lastElementChild
+
+    let cost = {{ session.price }}
+    let price = document.getElementById('price')
+
+    // console.log(price.innerHTML, typeof +price.innerHTML, cost, typeof cost) 
+	input.checked = !input.checked
+    // console.log(input.checked)
+    if (input.checked) {
+        price.innerHTML = +price.innerHTML + cost
+    }  else {
+        // console.log(price.innerHTML)
+        price.innerHTML = +price.innerHTML - cost
+    }
+	// if (input.checked) {
+	// 	label.style.background = 'blue'
+	// } else {
+	// 	label.style.background = ''
+	// }
+	// console.log(id)
+	// console.log(input.focus)
+	// console.log(input.checked)
+}
+</script>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-my">
+	<div class="row m-5">
+		<div class="col-lg-4"></div>
+		<div class="col-lg-4">
+			<h1>Зайти/Зарегистрироваться</h1>
+			<form action="" method="post">
+				{% csrf_token %}
+				<p>{{ form.email }}</p>
+                {% for error in errors2.email %}
+                <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+                <br>
+                <p>{{ form.password }}</p>
+                {% for error in errors2.password2 %}
+                <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+                {% for error in errors2.password %}
+                <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+                {% for error in errors3 %}
+                <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+				<button type="submit" class="btn btn-place">logIn/SignIn</button>
+			</form>
+			<a href="{% url 'password_reset' %}" class="text-danger">Забыли пароль?</a>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

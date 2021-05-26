@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Служба поддержки кинотеатра{% endblock %}
+
+{% block content %}
+<div class="container-my">
+<div class="row">
+    <div class="col-6">
+        <h1>Служба поддержки</h1>
+        <p>Если у вас возникли вопросы по работе сервиса, обратитесь к нашим специалистам. Режим работы 9:00-22:00 (по МСК).</p>
+    </div>
+    <div class="col-12">
+        <a href="vk.com"><img width="50"  src="{% static 'images/facebook.jpg' %}"></a>
+        <a href="vk.com"><img width="38"  src="{% static 'images/vk.png' %}"></a>
+        <a href="vk.com"><img width="50"  src="{% static 'images/inst.png' %}"></a>
+        <a href="vk.com"><img width="55"  src="{% static 'images/youtube.png' %}"></a>
+        <a href="vk.com"><img width="38"  src="{% static 'images/ok.png' %}"></a>
+        <a href="vk.com"><img width="38"  src="{% static 'images/viber.png' %}"></a>
+    </div>
+</div>
+</div>
+{% endblock %}

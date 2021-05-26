@@ -1,0 +1,30 @@
+{% if carousel_first_movie %}
+<section class="m-2">
+<div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner container-my">
+    <div class="carousel-item active" data-interval="10000">
+          <div class="carousel" style="background: url({{ carousel_first_movie.carousel.url }});
+                                              background-size: auto 100%;">
+            <a class="btn btn-primary btn-c" href="{% url 'movie_detail_today' city_slug carousel_first_movie.id  %}">Купить билет</a>
+          </div>
+    </div>
+      {% for movie in carousel_movies %}
+    <div class="carousel-item" data-interval="2000">
+          <div class="carousel" style="background: url({{ movie.carousel.url }});
+                                       background-size: auto 100%;">  
+            <a class="btn btn-primary btn-c" href="{% url 'movie_detail_today' city_slug movie.id  %}">Купить билет</a>
+          </div>
+    </div>
+      {% endfor %}
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Следующий</span>
+  </a>
+</div>
+</section>
+{% endif %}
